@@ -55,3 +55,13 @@ margin: 0.5em;
 color: rgb(5, 20, 61);
 }
 
+.nextprofile button {
+    width: 100%;
+    text-align: center;
+    align-self: center;
+    margin: auto;
+}
+
+.nextprofile button a {
+    text-decoration: none;
+}
