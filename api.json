@@ -1,0 +1,63 @@
+
+{
+  "results": [
+    {
+      "gender": "female",
+      "name": {
+        "title": "mrs",
+        "first": "avery",
+        "last": "campbell"
+      },
+      "location": {
+        "street": "3252 disputed rd",
+        "city": "alma",
+        "state": "yukon",
+        "postcode": "F1S 8T3",
+        "coordinates": {
+          "latitude": "-65.8748",
+          "longitude": "80.3882"
+        },
+        "timezone": {
+          "offset": "-9:00",
+          "description": "Alaska"
+        }
+      },
+      "email": "avery.campbell@example.com",
+      "login": {
+        "uuid": "3291560f-0360-46b9-8d0f-eebeaa9aaa7c",
+        "username": "whiteswan889",
+        "password": "1121",
+        "salt": "nAaySMpZ",
+        "md5": "f5403cd92df301d14ccc92424558ec02",
+        "sha1": "ddbade88fcb3ba0d57805897bbb23e700d332916",
+        "sha256": "53c6c60934b55b527ca9e156df907924f16846b3360934cb2b247211bb158c01"
+      },
+      "dob": {
+        "date": "1984-03-24T22:27:51Z",
+        "age": 35
+      },
+      "registered": {
+        "date": "2016-07-14T00:31:53Z",
+        "age": 2
+      },
+      "phone": "666-664-7662",
+      "cell": "457-868-4930",
+      "id": {
+        "name": "",
+        "value": null
+      },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/66.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/66.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/66.jpg"
+      },
+      "nat": "CA"
+    }
+  ],
+  "info": {
+    "seed": "a78ce70bf5b64646",
+    "results": 1,
+    "page": 1,
+    "version": "1.2"
+  }
+}

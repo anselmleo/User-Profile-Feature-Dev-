@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Mini App</title>
+
+    <style>
+      
+      body {
+        margin: 0;
+        padding: 0;
+        background: lavender;
+        overflow: hidden;
+      }
+      
+      h2.header-text {
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 3em;
+      }
+      
+      div.user-photo {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        margin: 1em auto;
+        background: #fff;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+      
+      div.user-photo img {
+        border-radius: inherit;
+        width: inherit;
+        height: inherit;
+        display: block;
+      }
+      
+      
+      div.details {
+        font-size: 2.3em;
+        margin: 2.5em 0.2em 0.2em 0.2em;
+        color: #fff;
+        padding: 1.1em;
+        min-height: 6em;
+        background-color: #6200ee;
+      }
+      
+      footer {
+        width: calc(100% - 2em);
+        z-index: 500;
+        position: absolute;
+        bottom: 0;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 1em;
+      }
+      
+      footer button.mdc-icon-button {
+        margin: 0.5em;
+        color: #fff;
+      }
+      
+    </style>
+  </head>
+  
+  <body>
+    
+    <h2 class="header-text">Anselm</h2>
+    
+    <div class="user-photo mdc-elevation--z3">
+      <img id="profile-image" src="https://via.placeholder.com/150" alt="Profile Img">
+    </div>
+    
+    <div class="details mdc-elevation--z3"></div>
+    
+    <div class="messages"></div>
+    
+    <footer>
+      <button id="btn-address" class="mdc-icon-button material-icons">location_on</button>
+      <button id="btn-phone" class="mdc-icon-button material-icons">phone</button>
+      <button id="btn-birthdate" class="mdc-icon-button material-icons">today</button>
+    </footer>
+    
+    <script>
+      
+      var displayAddress = ({location}) => {
+        document.querySelector('.details').innerHTML =
+        location.street + ", " + location.city + ", " + location.state; 
+        // `<p>Street: ${location.street}</p>
+		// <p>City: ${location.city}</p>
+        // <p>State: ${location.state}</p>`;
+      };
+      var displayPhone = ({phone, cell}) => {
+        document.querySelector('.details').innerHTML = 
+        phone + " / " + cell; 
+        // `<p>Phone: ${phone}</p>
+		// <p>Cell: ${cell}</p>`;
+      };
+      var displayBirthdate = ({dob}) => {
+        document.querySelector('.details').innerHTML =  
+        dob.age + " years old";
+        // `<p>Date: ${dob.date}</p>
+		// <p>Age: ${dob.age}</p>`;
+      };
+      
+      var displayExtraUserInfo = (extraUserInfo) => {
+        document.getElementById('btn-birthdate').addEventListener('click', ()=>{displayBirthdate(extraUserInfo)});
+        document.getElementById('btn-phone').addEventListener('click', ()=>{displayPhone(extraUserInfo)});
+        document.getElementById('btn-address').addEventListener('click', ()=>{displayAddress(extraUserInfo)});  
+      };
+      
+      //displayExtraUserInfo();
+      
+     
+      const notify = (msg) => {
+        const toastr = document.querySelector('.messages');
+        if(!toastr) return;
+        
+        toastr.textContent = msg;
+        if(!toastr.classList.contains('on')) {
+          toastr.classList.add('on');
+        }
+      };
+      
+      const clearNotice = () => {
+        const toastr = document.querySelector('.messages');
+        if(!toastr) return;
+        
+        toastr.textContent = '';
+        toastr.classList.remove('on');
+      };
+      
+      const displayUserPhotoAndName = (data) => {
+        if(!data) return;
+        
+        // add your code here
+		const {results} = data;
+        const [profile] = results;
+        document.querySelector('.header-text').innerHTML =
+        profile.name.title + " " + profile.name.last + " " + profile.name.first;
+        //`<span>${profile.name.title}</span> 
+		//<span>${profile.name.last}</span> 
+		//<span>${profile.name.first}</span>`;
+        
+        document.querySelector('#profile-image').src = profile.picture.large;
+        
+        displayExtraUserInfo(profile);
+        clearNotice();
+      };
+            
+      const getAUserProfile = () => {
+        const api = 'https://randomuser.me/api/';
+        
+        // make API call here
+        fetch(api)
+        .then((res)=>res.json())
+        .then((data)=> {
+          displayUserPhotoAndName(data)
+        })        
+        notify(`requesting profile data ...`);
+      };
+      
+      const startApp = () => {
+        
+        // invoke the getAUserProfile here
+        getAUserProfile();
+        
+      };
+
+      startApp();
+    </script>
+  </body>
+</html>
